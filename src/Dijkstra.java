@@ -202,7 +202,7 @@ for (int vecino = 0; vecino < cantidad; vecino++) {
     }
 }
 
-Si se juntan matriz y bucles quedaría una complejidad de O(V^2)
+Si se juntan matriz y bucles quedaría una complejidad de O(V^2)!
 
  */
 
