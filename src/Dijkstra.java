@@ -120,6 +120,7 @@ public class Dijkstra{
         }
     }
 }
+
 /*
 V = Cantidad de vertices en el grafo
 E = Cantidad de aristas o conexiones del grafo
@@ -150,5 +151,58 @@ for (int[] arista : grafo.get(actual)) {
     Al combinar estas operaciones, obtenemos la complejidad temporal habitual:
     O((V+E)logV)
     O(V)+O(E)+O((V+E)log V)
+
+Complejidad espacial: Indica cómo crece la cantidad de memoria que necesita el algoritmo cuando aumenta el tamaño del problema
+private List<List<int[]>> grafo; O(V + E) Para V vértices, V listas que además van a contener a las aristas
+
+Arreglos O(V) + O(V) + O(V) + O(V) + O(V)
+String[] vertices;
+int[] distancia = new int[cantidad];
+boolean[] visitado = new boolean[cantidad];
+int[] anterior = new int[cantidad];
+
+Cola depende de el número de conexiones a analizar que no siempre va a ser el total de elementos O(E)
+PriorityQueue<int[]> cola = new PriorityQueue<>(
+    Comparator.comparingInt(a -> a[1])
+);
+cola.add(new int[]{vecino, nuevaDistancia});
+
+O(V) El camino obtiene el total de elementos
+int[] camino = new int[vertices.length];
+
+Complejidad Espacial:
+O(V) + O(V) + O(V) + O(V) + O(V) + O(E) + O(V)
+
+O(6V + 2E)
+O(V+E)
+
+Variaciones de la complejidad:
+
+Sin una priority queue (O(V)) Un ciclo contenido dentro de otro (O(V^2)
+for (int paso = 0; paso < cantidad; paso++) {
+    // Buscar el vértice con menor distancia
+}
+for (int i = 0; i < cantidad; i++) {
+    if (!visitado[i] && distancia[i] < menorDistancia) {
+        menorDistancia = distancia[i];
+        actual = i;
+    }
+}
+Sin una lista de adyacencia se usa una matriz de adyacencia y se revisan cada una de las conexiones de cada vertice O(V^2)
+private int[][] grafo; (Guarda cada conexión y no solo al vecino
+for (int vecino = 0; vecino < cantidad; vecino++) {
+    if (grafo[actual][vecino] != -1 && !visitado[vecino]) {
+        int nuevaDistancia =
+            distancia[actual] + grafo[actual][vecino];
+
+        if (nuevaDistancia < distancia[vecino]) {
+            distancia[vecino] = nuevaDistancia;
+            anterior[vecino] = actual;
+        }
+    }
+}
+
+Si se juntan matriz y bucles quedaría una complejidad de O(V^2)
+
  */
 
